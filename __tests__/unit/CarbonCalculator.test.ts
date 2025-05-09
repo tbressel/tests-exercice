@@ -21,4 +21,11 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         expect(() => calculator.calculateEmission(type, distance, weight)).not.toThrow();
     });
 
+    it('SHOULD throw an Error for DELTA_PLANE data', () => {
+        const type: any = 'DELTA_PLANE'; // do I test typescript or not here ??
+        const distance: number = 50;
+        const weight: number = 50;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
+    });
+
 });
