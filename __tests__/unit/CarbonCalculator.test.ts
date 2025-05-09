@@ -11,6 +11,7 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         transportType = new TransportConfig();
     });
 
+
     // A valid transport type
     it('should\'nt throw an Error for BIKE data', () => {
         const type: TransportType = 'BIKE';
@@ -18,6 +19,7 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         const weight: number = 5;
         expect(() => calculator.calculateEmission(type, distance, weight)).not.toThrow();
     });
+
 
     // An invalid transport type
     it('SHOULD throw an Error for DELTA_PLANE data', () => {
@@ -27,17 +29,19 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
     });
 
+
     // NOT a valide distance
     it('should throw an Error if distance is zero or negative', () => {
         const type: TransportType = 'BIKE';
         let distance: number = 0;
         let weight: number = 10;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Distance must be a zero or up to zero.");
-        
+
         distance = -155;
         weight = 10;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Distance must be a zero or up to zero.");
     });
+
 
     // NOT a valide weight
     it('should throw an Error if weight is negative', () => {
@@ -46,5 +50,30 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         let weight: number = -66;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Weight must be a up to zero.");
     });
+
+
+    // NOT a valide number (testing the famous number : NaN ! in differente parameters and different types) 
+    it('should throw an Error if distance or weight is not a number', () => {
+        const type: TransportType = 'BIKE';
+        let distance: number = NaN;
+        let weight: number = 10;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
+        
+        distance = 10;
+        weight = NaN;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
+        
+        distance = "bla-bla" as any;
+        weight = 10;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
+        
+        distance = 10;
+        weight = ["blablabla", "truc muche"] as any;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
+    });
+
+
+
+    
 
 });
