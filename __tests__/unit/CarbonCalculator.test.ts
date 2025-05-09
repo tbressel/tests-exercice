@@ -11,9 +11,7 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         transportType = new TransportConfig();
     });
 
-    /**
-     * Test that do not return an Error with valide datas
-     */
+    // A valid transport type
     it('should\'nt throw an Error for BIKE data', () => {
         const type: TransportType = 'BIKE';
         const distance: number = 10;
@@ -21,11 +19,24 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         expect(() => calculator.calculateEmission(type, distance, weight)).not.toThrow();
     });
 
+    // An invalid transport type
     it('SHOULD throw an Error for DELTA_PLANE data', () => {
         const type: any = 'DELTA_PLANE'; // do I test typescript or not here ??
         const distance: number = 50;
         const weight: number = 50;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
+    });
+
+    // NOT a valide distance
+    it('should throw an Error if distance is zero or negative', () => {
+        const type: TransportType = 'BIKE';
+        let distance: number = 0;
+        let weight: number = 10;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Distance must be a zero or up to zero.");
+        
+        distance = -155;
+        weight = 10;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Distance must be a zero or up to zero.");
     });
 
 });
