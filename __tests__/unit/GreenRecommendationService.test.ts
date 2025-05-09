@@ -106,4 +106,7 @@ describe('Testing getSuggestedTransport, isDeadlineFeasible and calculateTimeEst
         const deadline = 0.000000001;
         expect(() => service.getSuggestedTransport(distance, weight, deadline)).toThrow("No transport found for these given parameters.");
     });
+
+
+
 })
