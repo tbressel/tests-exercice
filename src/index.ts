@@ -21,9 +21,8 @@ import { TransportConfig } from './Config/TransportConfig';
 const config = new TransportConfig();
 
 
-
-// Définition des routes
-router.get('/suggested-transport', (req: any, res: any) => {
+// http://localhost:3000/api/suggested-transport?distance=10&weight=10&deadline=1
+router.get('/suggested-transport', (req: Request, res: any) => {
     const { distance, weight, deadline } = req.query;
 
     if (!distance || !weight || !deadline) {
@@ -42,8 +41,15 @@ router.get('/suggested-transport', (req: any, res: any) => {
     }
 });
 
-
-
+//http://localhost:3000/api/transport-types
+router.get('/transport-types', (req: Request, res: Response) => {
+    try {
+        const transportTypes = config.getTransportType();
+        res.json({ transportTypes });
+    } catch (err: any) {
+        res.status(400).json({ error: err.message });
+    }
+});
 
 
 
