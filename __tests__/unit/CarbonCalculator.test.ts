@@ -39,4 +39,12 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Distance must be a zero or up to zero.");
     });
 
+    // NOT a valide weight
+    it('should throw an Error if weight is negative', () => {
+        const type: TransportType = 'BIKE';
+        let distance: number = 10;
+        let weight: number = -66;
+        expect(() => calculator.calculateEmission(type, distance, weight)).toThrow("Weight must be a up to zero.");
+    });
+
 });
