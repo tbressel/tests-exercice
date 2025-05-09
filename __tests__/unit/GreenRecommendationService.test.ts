@@ -57,12 +57,34 @@ describe('Testing getEmissionFactor, validateInputs and calculateEmission intro 
         expect(service.isDeadlineFeasible(type, distance, deadline)).toBe(true);
     });
 
-    // NOT Valide id it returns true
+    // NOT Valide if it returns true
     it('should return false if estimation up to the deadline', () => {
         const type: TransportType = 'BIKE';
         const distance = 1000;
         const deadline = 0.1;
         expect(service.isDeadlineFeasible(type, distance, deadline)).toBe(false);
+    });
+
+
+
+    // NOT valide if parameters are not in the right type
+    it('should throw if distance or deadline is invalid', () => {
+        const type: TransportType = 'BIKE';
+        let distance: number = -69;
+        let deadline: number = 10;
+        expect(() => service.isDeadlineFeasible(type, distance, deadline)).toThrow();
+
+        distance = 10;
+        deadline = -666;
+        expect(() => service.isDeadlineFeasible(type, distance, deadline)).toThrow();
+
+        distance = NaN;
+        deadline = 10;
+        expect(() => service.isDeadlineFeasible(type, distance, deadline)).toThrow();
+
+        distance = 10;
+        deadline = NaN;
+        expect(() => service.isDeadlineFeasible(type, distance, deadline)).toThrow();
     });
 
 })
