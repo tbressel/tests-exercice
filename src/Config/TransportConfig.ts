@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // define type 
-type TransportType = typeof transportTypes[number];
+export type TransportType = typeof transportTypes[number];
 
 const transportTypes = [
   'BIKE',
