@@ -57,5 +57,12 @@ describe('Testing getEmissionFactor, validateInputs and calculateEmission intro 
         expect(service.isDeadlineFeasible(type, distance, deadline)).toBe(true);
     });
 
+    // NOT Valide id it returns true
+    it('should return false if estimation up to the deadline', () => {
+        const type: TransportType = 'BIKE';
+        const distance = 1000;
+        const deadline = 0.1;
+        expect(service.isDeadlineFeasible(type, distance, deadline)).toBe(false);
+    });
 
 })
