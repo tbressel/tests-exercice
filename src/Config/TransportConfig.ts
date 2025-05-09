@@ -2,9 +2,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // define type 
-export type TransportType = typeof transportTypes[number];
+export type TransportType = typeof TRANSPORT_TYPES[number];
 
-const transportTypes = [
+const TRANSPORT_TYPES = [
   'BIKE',
   'ELECTRIC_CAR',
   'SCOOTER',
@@ -42,7 +42,7 @@ export class TransportConfig {
    * @param type kind of vehicle
    * @returns 
    */
-  getEmissionFactor(type: TransportType): number {
+  public getEmissionFactor(type: TransportType): number {
     return this.getTransportConstValue(`EMISSION_${type}`);
   }
 
@@ -52,7 +52,7 @@ export class TransportConfig {
    * @param type of a kind of transport
    * @returns 
    */
-  getAverageSpeed(type: TransportType): number {
+  public getAverageSpeed(type: TransportType): number {
     return this.getTransportConstValue(`SPEED_${type}`);
   }
 
@@ -62,7 +62,14 @@ export class TransportConfig {
    * @param type 
    * @returns 
    */
-  getMaxWeight(type: TransportType): number {
+  public getMaxWeight(type: TransportType): number {
     return this.getTransportConstValue(`MAX_WEIGHT_${type}`);
   }
+
+
+
+  public getTransportType(): TransportType[] {
+    return [...TRANSPORT_TYPES];
+  }
+
 }

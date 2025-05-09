@@ -1,3 +1,13 @@
+# Commandes :
+
+## executer le projet
+```bash
+pnpm run dev
+```
+
+
+
+
 <style>
         body {
             background-color: #f4f4f4;
