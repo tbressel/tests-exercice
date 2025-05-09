@@ -50,7 +50,10 @@ export class CarbonCalculator {
  * @returns 
  */
   calculateEmission(transportType: TransportType, distance: number, weight: number): number {
+    // Test if value are correct : if not the program stop.
     this.validateInputs(transportType, distance, weight);
+
+    // If ok run the calcule
     const emissionFactor = this.transportConfig.getEmissionFactor(transportType);
     return distance * emissionFactor * (1 + weight / 100);
   }
