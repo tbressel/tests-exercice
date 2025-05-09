@@ -98,4 +98,12 @@ describe('Testing getSuggestedTransport, isDeadlineFeasible and calculateTimeEst
         expect(allTransports.includes(suggestion)).toBe(true);
     });
 
+
+    // NOT Valide (false) if parameters don't permit to get a Valide transport type
+    it('should throw an Error if no transport return', () => {
+        const distance = 666666;
+        const weight = 123456;
+        const deadline = 0.000000001;
+        expect(() => service.getSuggestedTransport(distance, weight, deadline)).toThrow("No transport found for these given parameters.");
+    });
 })
