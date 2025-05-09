@@ -40,5 +40,19 @@ export class CarbonCalculator {
     const maxAllowedWeight = this.transportConfig.getMaxWeight(transportType);
     if (weight > maxAllowedWeight) throw new Error(`Weight is not allowed for ${transportType}: ${maxAllowedWeight}`);
   }
+
+
+/**
+ * Calculate emmision if datas are validated 
+ * @param transportType 
+ * @param distance 
+ * @param weight 
+ * @returns 
+ */
+  calculateEmission(transportType: TransportType, distance: number, weight: number): number {
+    this.validateInputs(transportType, distance, weight);
+    const emissionFactor = this.transportConfig.getEmissionFactor(transportType);
+    return distance * emissionFactor * (1 + weight / 100);
+  }
   
 }
