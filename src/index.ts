@@ -21,7 +21,7 @@ import { TransportConfig, TransportType } from './Config/TransportConfig';
 const config = new TransportConfig();
 
 
-// http://localhost:3000/api/suggested-transport?distance=10&weight=10&deadline=1
+//http://localhost:3000/api/suggested-transport?distance=100&weight=50&deadline=5
 router.get('/suggested-transport', (req: Request, res: any) => {
     const { distance, weight, deadline } = req.query;
 
