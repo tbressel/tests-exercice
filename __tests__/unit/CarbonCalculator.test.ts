@@ -2,7 +2,7 @@ import { CarbonCalculator } from "../../src/Classes/CarbonCalculator";
 import type { TransportType } from "../../src/Config/TransportConfig";
 import { TransportConfig } from "../../src/Config/TransportConfig";
 
-describe('Testing validateInputs for calculateEmission intro CarbonCalculator class', () => {
+describe('Testing getEmissionFactor, validateInputs and calculateEmission intro CarbonCalculator class', () => {
     let calculator: CarbonCalculator;
     let transportType: TransportConfig;
 
