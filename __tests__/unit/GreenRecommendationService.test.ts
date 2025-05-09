@@ -5,7 +5,7 @@ import { TransportConfig } from "../../src/Config/TransportConfig";
 
 
 
-describe('Testing getEmissionFactor, validateInputs and calculateEmission intro CarbonCalculator class', () => {
+describe('Testing getSuggestedTransport, isDeadlineFeasible and calculateTimeEstimation intro GreenRecommendationService class', () => {
     let service: GreenRecommendationService;
     let transportConfig: TransportConfig;
 
@@ -85,6 +85,17 @@ describe('Testing getEmissionFactor, validateInputs and calculateEmission intro 
         distance = 10;
         deadline = NaN;
         expect(() => service.isDeadlineFeasible(type, distance, deadline)).toThrow();
+    });
+
+
+    // Valide (true) if parameters permit to get a Valide transport type
+    it('should return a valid transport type  if conditions are good', () => {
+        const distance = 10;
+        const weight = 5;
+        const deadline = 10;
+        const suggestion = service.getSuggestedTransport(distance, weight, deadline);
+        const allTransports = transportConfig.getTransportType();
+        expect(allTransports.includes(suggestion)).toBe(true);
     });
 
 })
