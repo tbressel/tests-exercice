@@ -17,7 +17,7 @@ const router = Router();
 import { GreenRecommendationService } from "./Classes/GreenRecommendationService";
 const service = new GreenRecommendationService();
 
-import { TransportConfig } from './Config/TransportConfig'; 
+import { TransportConfig, TransportType } from './Config/TransportConfig'; 
 const config = new TransportConfig();
 
 
@@ -51,7 +51,22 @@ router.get('/transport-types', (req: Request, res: Response) => {
     }
 });
 
+//http://localhost:3000/api/average-speed?type=BIKE
+router.get('/average-speed', (req: Request, res: any) => {
+    console.log(req.query)
+    const { type } = req.query;
 
+    if (!type) {
+        return res.status(400).json({ error: 'Missing query parameter: type' });
+    }
+
+    try {
+        const speed = config.getAverageSpeed(type as string as any);
+        res.json({ speed });
+    } catch (err: any) {
+        res.status(400).json({ error: err.message });
+    }
+});
 
 
 
