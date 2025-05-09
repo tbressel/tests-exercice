@@ -58,28 +58,35 @@ describe('Testing validateInputs for calculateEmission intro CarbonCalculator cl
         let distance: number = NaN;
         let weight: number = 10;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
-        
+
         distance = 10;
         weight = NaN;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
-        
+
         distance = "bla-bla" as any;
         weight = 10;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
-        
+
         distance = 10;
         weight = ["blablabla", "truc muche"] as any;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow();
     });
 
-    
+
     // NOT a valid weight up to the max limit weight
     it('should throw an Error if weight exceeds allowed max weight for transport type', () => {
-        const type: TransportType= 'BIKE';
+        const type: TransportType = 'BIKE';
         const distance: number = 10;
         const maxWeight = transportType.getMaxWeight(type);
         const weight = maxWeight + 10;
         expect(() => calculator.calculateEmission(type, distance, weight)).toThrow(`Weight is not allowed for ${type}`);
+    });
+
+
+    // NOT a valid type of transport if NOT in transport list
+    it("should throw an Error for invalid transport type", () => {
+        //@ts-expect-error
+        expect(() => calculator.getEmissionFactor('DELTA_PLANE')).toThrow();
     });
 
 });
